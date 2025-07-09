@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logistics Warehouse Management System (LWMS)</title>
+  <link rel="stylesheet" href="styles.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="header">
+    <h1>LWMS</h1>
+    <nav class="navbar">
+      <button id="theme-toggle">🌙</button>
+    </nav>
+  </header>
+  <div class="container">
+    <aside class="sidebar">
+      <ul>
+        <li class="active" onclick="showModule('inventory')">Inventory Management</li>
+        <li onclick="showModule('space')">Space Optimization</li>
+        <li onclick="showModule('shipment')">Shipment Handling</li>
+        <li onclick="showModule('maintenance')">Maintenance Scheduling</li>
+        <li onclick="showModule('performance')">Performance Reporting</li>
+      </ul>
+    </aside>
+    <main class="main-content">
+      <section id="inventory" class="module active">
+        <div class="form-card">
+          <h2>Add Inventory Item</h2>
+          <form id="inventory-form">
+            <input type="text" placeholder="Item Name" required id="itemName" />
+            <input type="text" placeholder="Category" required id="itemCategory" />
+            <input type="number" placeholder="Quantity" required id="itemQuantity" />
+            <input type="text" placeholder="Location" required id="itemLocation" />
+            <button type="submit">Add Item</button>
+          </form>
+          <div id="spinner" class="spinner hidden"></div>
+        </div>
+        <div class="table-card">
+          <h2>Inventory List</h2>
+          <table id="inventoryTable">
+            <thead>
+              <tr><th>Item</th><th>Category</th><th>Qty</th><th>Location</th><th>Actions</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <canvas id="categoryChart"></canvas>
+      </section>
+      <section id="space" class="module">Space Optimization Coming Soon...</section>
+      <section id="shipment" class="module">Shipment Handling Coming Soon...</section>
+      <section id="maintenance" class="module">Maintenance Scheduling Coming Soon...</section>
+      <section id="performance" class="module">Performance Reporting Coming Soon...</section>
+    </main>
+  </div>
+ 
+  <!-- <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Item Details</h2>
+      <p id="modalDetails"></p>
+    </div>
+  </div> -->
+ 
+  <div id="toast" class="toast hidden">Item added successfully!</div>
+ 
+  <script>
+    const form = document.getElementById('inventory-form');
+    const tableBody = document.querySelector('#inventoryTable tbody');
+    const spinner = document.getElementById('spinner');
+    const toast = document.getElementById('toast');
+    const modal = document.getElementById('modal');
+    const modalDetails = document.getElementById('modalDetails');
+    const themeToggle = document.getElementById('theme-toggle');
+    let chart;
+ 
+    const items = [];
+ 
+    function showModule(id) {
+      document.querySelectorAll('.module').forEach(mod => mod.classList.remove('active'));
+      document.querySelector(`#${id}`).classList.add('active');
+ 
+      document.querySelectorAll('.sidebar ul li').forEach(li => li.classList.remove('active'));
+event.target.classList.add('active');
+    }
+ 
+    function renderChart() {
+      const ctx = document.getElementById('categoryChart');
+      const categoryMap = {};
+      items.forEach(i => {
+        categoryMap[i.category] = (categoryMap[i.category] || 0) + parseInt(i.quantity);
+      });
+      const labels = Object.keys(categoryMap);
+      const data = Object.values(categoryMap);
+      if (chart) chart.destroy();
+      chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{ label: 'Quantity by Category', data, backgroundColor: '#4dc9f6' }]
+        },
+        options: { responsive: true }
+      });
+    }
+ 
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      spinner.classList.remove('hidden');
+      setTimeout(() => {
+        const item = {
+          name: form.itemName.value,
+          category: form.itemCategory.value,
+          quantity: form.itemQuantity.value,
+          location: form.itemLocation.value
+        };
+        items.push(item);
+ 
+        const row = document.createElement('tr');
+row.innerHTML = `${item.name}</td><td>${item.category}</td><td>${item.quantity}</td><td>${item.location}</td>
+          <td><button onclick='viewItem(${items.length - 1})'>View</button>
+          <button onclick='deleteItem(this, ${items.length - 1})'>Delete</button></td>`;
+        tableBody.appendChild(row);
+ 
+        form.reset();
+        spinner.classList.add('hidden');
+        toast.classList.remove('hidden');
+        setTimeout(() => toast.classList.add('hidden'), 2000);
+        renderChart();
+      }, 1000);
+    });
+ 
+    function viewItem(index) {
+      const item = items[index];
+modalDetails.innerText = `Name: ${item.name}\nCategory: ${item.category}\nQuantity: ${item.quantity}\nLocation: ${item.location}`;
+      modal.classList.remove('hidden');
+    }
+ 
+    function deleteItem(btn, index) {
+      items.splice(index, 1);
+      btn.closest('tr').remove();
+      renderChart();
+    }
+ 
+    function closeModal() {
+      modal.classList.add('hidden');
+    }
+ 
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+    });
+  </script>
+ 
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; display: flex; flex-direction: column; min-height: 100vh; background: #f9f9f9; transition: background 0.3s; }
+    body.dark-mode { background: #222; color: #fff; }
+    .header { display: flex; justify-content: space-between; padding: 1rem 2rem; background: #2b7a78; color: #fff; }
+    .container { display: flex; flex: 1; }
+    .sidebar { width: 220px; background: #17252a; color: white; padding: 1rem; }
+    .sidebar ul li { padding: 10px; cursor: pointer; transition: background 0.3s; border-radius: 5px; }
+    .sidebar ul li:hover, .sidebar ul li.active { background: #3aafa9; }
+    .main-content { flex: 1; padding: 2rem; overflow-y: auto; }
+    .form-card, .table-card { background: white; padding: 1rem; margin-bottom: 2rem; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: all 0.3s ease; }
+    input, button { padding: 10px; margin: 5px; border: 1px solid #ccc; border-radius: 8px; }
+    button:hover { background: #3aafa9; color: white; cursor: pointer; transition: 0.3s; }
+    .spinner { border: 4px solid #f3f3f3; border-top: 4px solid #3aafa9; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; }
+    .hidden { display: none; }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }
+    .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; }
+    .modal-content { background: white; padding: 2rem; border-radius: 10px; width: 300px; }
+    .close { float: right; font-size: 24px; cursor: pointer; }
+    .toast { position: fixed; bottom: 20px; right: 20px; background: #3aafa9; color: white; padding: 10px 20px; border-radius: 5px; animation: fadein 0.5s; }
+    @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+    @media(max-width: 768px) {
+      .container { flex-direction: column; }
+      .sidebar { width: 100%; }
+    }
+  </style>
+</body>
+</html>

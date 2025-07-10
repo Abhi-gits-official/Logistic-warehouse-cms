@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logistics Warehouse Management System (LWMS)</title>
+  <link rel="stylesheet" href="./css/style.css"  />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="header">
+    <h1>LWMS Dashboard</h1>
+    <nav class="navbar">
+      <button id="theme-toggle">🌙</button>
+    </nav>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <ul>
+        <li class="active" onclick="showModule(event, 'inventory')">Inventory Management</li>
+        <li onclick="showModule(event, 'space')">Space Optimization</li>
+        <li onclick="showModule(event, 'shipment')">Shipment Handling</li>
+        <li onclick="showModule(event, 'maintenance')">Maintenance Scheduling</li>
+        <li onclick="showModule(event, 'performance')">Performance Reporting</li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <section id="inventory" class="module active">
+        <div class="form-card">
+          <h2>Add Inventory Item</h2>
+          
+          <div id="spinner" class="spinner hidden"></div>
+        </div>
+
+
+        <div class="chart-card">
+          <h2>Inventory Overview</h2>
+          <canvas id="categoryChart"></canvas>
+        </div>
+      </section>
+
+      <section id="space" class="module">Space Optimization Coming Soon...</section>
+      <section id="shipment" class="module">Shipment Handling Coming Soon...</section>
+      <section id="maintenance" class="module">Maintenance Scheduling Coming Soon...</section>
+      <section id="performance" class="module">Performance Reporting Coming Soon...</section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast hidden">Item added successfully!</div>
+
+  <script src="./js/script.js"></script>
+</body>
+</html>

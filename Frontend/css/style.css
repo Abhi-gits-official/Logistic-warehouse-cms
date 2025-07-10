@@ -1,0 +1,177 @@
+:root {
+  --primary: #262e35;
+  /* --accent: #43A047; */
+  --accent: linear-gradient(90deg, #3F2B96 0%, #A8C0FF 100%);
+  --bg-light: #F5F7FA;
+  --bg-dark: #121212;
+  --text-light: #333;
+  --text-dark: #EEE;
+  --radius: 8px;
+}
+
+
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: var(--bg-light);
+  color: var(--text-light);
+  transition: background 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+  background: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+.header {
+  background: var(--primary);
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(235, 230, 230);
+}
+
+.sidebar {
+  flex: 1 1 220px;
+  background: var(--accent);
+  padding: 1rem;
+  color: white;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 0.6rem;
+  margin-bottom: 0.5rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.sidebar li:hover,
+.sidebar li.active {
+  background: rgba(255,255,255,0.2);
+}
+
+.main-content {
+  flex: 3 1 600px;
+  padding: 2rem;
+}
+
+.module {
+  display: none;
+}
+
+.module.active {
+  display: block;
+}
+
+.form-card,
+.table-card,
+.chart-card {
+  background: white;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+input,
+button {
+  padding: 0.6rem;
+  margin: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #2e7d32;
+}
+
+.spinner {
+  display: none;
+  border: 4px solid #eee;
+  border-top: 4px solid var(--primary);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 1rem auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--primary);
+  color: white;
+  padding: 0.75rem 1.2rem;
+  border-radius: var(--radius);
+  display: none;
+  z-index: 999;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+
+  input,
+  button {
+    margin: 0.3rem 0;
+  }
+}

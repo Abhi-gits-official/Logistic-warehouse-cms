@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logistics Warehouse Management System (LWMS)</title>
+  <link rel="stylesheet" href="./css/style.css"  />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="header">
+    <h1>LWMS Dashboard</h1>
+    <nav class="navbar">
+      <button id="theme-toggle">🌙</button>
+    </nav>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <!-- <ul>
+        <li class="active" onclick="showModule(event, 'inventory')">Inventory Management</li>
+        <li onclick="showModule(event, 'space'); window.location.href='manage_space.html' ">Space Optimization</li>
+        <li onclick="showModule(event, 'shipment'); window.location.href='shipment.html'  ">Shipment Handling</li>
+        <li onclick="showModule(event, 'maintenance'); window.location.href='maintenance.html' ">Maintenance Scheduling</li>
+        <li onclick="showModule(event, 'performance'); window.location.href='reporting.html' ">Performance Reporting</li>
+      </ul> -->
+      <ul>
+        <li class="active"><a  href="./index.html">Inventory Management</a></li>
+        <li class="active"><a href="./manage_space.html">Space Optimization</a></li>
+        <li class="active"><a href="./manage_space.html">Shipment</a></li>
+        <li class="active"><a href="./maintenance.html">Maintenance Scheduling</a></li>
+        <li class="active"><a href="./reporting.html">Performance Reporting</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <section id="inventory" class="module active">
+        <div class="form-card">
+          <h2>Add Inventory Item</h2>
+          <form id="inventory-form">
+            <input type="text" placeholder="Item Name" required id="itemName" />
+            <input type="text" placeholder="Category" required id="itemCategory" />
+            <input type="number" placeholder="Quantity" required id="itemQuantity" />
+            <input type="text" placeholder="Location" required id="itemLocation" />
+            <button type="submit">Add Item</button>
+          </form>
+          <div id="spinner" class="spinner hidden"></div>
+        </div>
+
+        <div class="table-card">
+          <h2>Inventory List</h2>
+          <table id="inventoryTable">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Category</th>
+                <th>Qty</th>
+                <th>Location</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="chart-card">
+          <h2>Inventory Overview</h2>
+          <canvas id="categoryChart"></canvas>
+        </div>
+      </section>
+
+      <section id="space" class="module">Space Optimization Coming Soon...</section>
+      <section id="shipment" class="module">Shipment Handling Coming Soon...</section>
+      <section id="maintenance" class="module">Maintenance Scheduling Coming Soon...</section>
+      <section id="performance" class="module">Performance Reporting Coming Soon...</section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast hidden">Item added successfully!</div>
+
+  <script src="./js/script.js"></script>
+</body>
+</html>

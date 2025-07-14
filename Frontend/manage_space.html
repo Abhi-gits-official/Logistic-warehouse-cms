@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Logistics Warehouse Management System (LWMS)</title>
-  <link rel="stylesheet" href="./css/style.css"  />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>Manage Space - Logistics Warehouse Management System (LWMS)</title>
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
   <header class="header">
-    <h1>LWMS Dashboard</h1>
+    <h1>Manage Space</h1>
     <nav class="navbar">
       <button id="theme-toggle">🌙</button>
     </nav>
@@ -18,8 +17,8 @@
   <div class="container">
     <aside class="sidebar">
       <ul>
-        <li class="active" onclick="showModule(event, 'inventory')">Inventory Management</li>
-        <li onclick="showModule(event, 'space')">Space Optimization</li>
+        <li onclick="showModule(event, 'inventory')">Inventory Management</li>
+        <li class="active" onclick="showModule(event, 'space')">Space Optimization</li>
         <li onclick="showModule(event, 'shipment')">Shipment Handling</li>
         <li onclick="showModule(event, 'maintenance')">Maintenance Scheduling</li>
         <li onclick="showModule(event, 'performance')">Performance Reporting</li>
@@ -27,32 +26,40 @@
     </aside>
 
     <main class="main-content">
-      <section id="inventory" class="module active">
+      <section id="space" class="module active">
         <div class="form-card">
-          <h2>This is a Space Optimization Page</h2>
-          
-          <div id="spinner" class="spinner hidden"></div>
+          <h2>Filter Product Space Occupancy</h2>
+          <form id="filter-form">
+            <label for="product-type">Product Type:</label>
+            <select id="product-type" name="product-type">
+              <option value="all">All</option>
+              <option value="type1">Type 1</option>
+              <option value="type2">Type 2</option>
+              <option value="type3">Type 3</option>
+            </select>
+            <button type="submit">Filter</button>
+          </form>
         </div>
 
         <div class="table-card">
-          <h2>Inventory List</h2>
-          
-        </div>
-
-        <div class="chart-card">
-          <h2>Inventory Overview</h2>
-          <canvas id="categoryChart"></canvas>
+          <h2>Space Occupancy List</h2>
+          <table id="occupancy-table">
+            <thead>
+              <tr>
+                <th>Product Type</th>
+                <th>Occupied Space</th>
+                <th>Total Space</th>
+                <th>Occupancy Rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dynamic content will be populated here -->
+            </tbody>
+          </table>
         </div>
       </section>
-
-      <section id="space" class="module">Space Optimization Coming Soon...</section>
-      <section id="shipment" class="module">Shipment Handling Coming Soon...</section>
-      <section id="maintenance" class="module">Maintenance Scheduling Coming Soon...</section>
-      <section id="performance" class="module">Performance Reporting Coming Soon...</section>
     </main>
   </div>
-
-  <div id="toast" class="toast hidden">Item added successfully!</div>
 
   <script src="./js/script.js"></script>
 </body>

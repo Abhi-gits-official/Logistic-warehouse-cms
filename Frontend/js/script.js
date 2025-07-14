@@ -1,64 +1,39 @@
-const form = document.getElementById('inventory-form');
-const tableBody = document.querySelector('#inventoryTable tbody');
-const spinner = document.getElementById('spinner');
-const toast = document.getElementById('toast');
-const themeToggle = document.getElementById('theme-toggle');
-let chart;
-const items = [];
+// This file contains JavaScript code for the frontend application, handling user interactions, and dynamic content updates.
 
-function showModule(event, id) {
-  document.querySelectorAll('.module').forEach(mod => mod.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.querySelectorAll('.sidebar li').forEach(li => li.classList.remove('active'));
-  event.target.classList.add('active');
-}
+document.addEventListener('DOMContentLoaded', function() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const modules = document.querySelectorAll('.module');
+    const toast = document.getElementById('toast');
 
-function renderChart() {
-  const ctx = document.getElementById('categoryChart');
-  const categoryMap = {};
-  items.forEach(i => {
-    categoryMap[i.category] = (categoryMap[i.category] || 0) + parseInt(i.quantity);
-  });
-  const labels = Object.keys(categoryMap);
-  const data = Object.values(categoryMap);
-  if (chart) chart.destroy();
-  chart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels,
-      datasets: [{ label: 'Quantity by Category', data, backgroundColor: '#1E88E5' }]
-    },
-    options: { responsive: true }
-  });
-}
+    themeToggle.addEventListener('click', function() {
+        document.body.classList.toggle('dark-theme');
+    });
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  spinner.classList.remove('hidden');
-  setTimeout(() => {
-    const item = {
-      name: form.itemName.value,
-      category: form.itemCategory.value,
-      quantity: form.itemQuantity.value,
-      location: form.itemLocation.value
-    };
-    items.push(item);
+    function showModule(event, moduleId) {
+        modules.forEach(module => {
+            module.classList.remove('active');
+        });
+        document.getElementById(moduleId).classList.add('active');
 
-    const row = document.createElement('tr');
-    row.innerHTML = `<td>${item.name}</td><td>${item.category}</td><td>${item.quantity}</td><td>${item.location}</td>
-      <td><button onclick='deleteItem(this, ${items.length - 1})'>Delete</button></td>`;
-    tableBody.appendChild(row);
+        // Hide toast when switching modules
+        toast.classList.add('hidden');
+    }
 
-    form.reset();
-    spinner.classList.add('hidden');
-    toast.classList.remove('hidden');
-    setTimeout(() => toast.classList.add('hidden'), 2000);
-    renderChart();
-  }, 1000);
+    // Example function to show toast notification
+    function showToast(message) {
+        toast.textContent = message;
+        toast.classList.remove('hidden');
+        setTimeout(() => {
+            toast.classList.add('hidden');
+        }, 3000);
+    }
+
+    // Add event listeners for navigation
+    const navItems = document.querySelectorAll('.sidebar li');
+    navItems.forEach(item => {
+        item.addEventListener('click', (event) => {
+            const moduleId = item.getAttribute('onclick').match(/'([^']+)'/)[1];
+            showModule(event, moduleId);
+        });
+    });
 });
-
-function deleteItem(btn, index) {
-  items.splice(index, 1); // remove item from array
-  btn.closest('tr').remove(); // remove row from table
-  renderChart(); // re-render chart with updated data
-}

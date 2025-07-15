@@ -79,20 +79,27 @@ function initializeApp() {
 }
 // Sidebar Functionality
 function initializeSidebar() {
- sidebarToggle.addEventListener('click', toggleSidebar);
- 
- // Close sidebar on mobile when clicking outside
- document.addEventListener('click', function(e) {
- if (window.innerWidth <= 1024) {
- if (!sidebar.contains(e.target) && 
-!sidebarToggle.contains(e.target)) {
- sidebar.classList.remove('show');
- }
- }
- });
+  sidebarToggle.addEventListener('click', toggleSidebar);
+
+  document.addEventListener('click', function(e) {
+    if (window.innerWidth <= 1024) {
+      if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+        sidebar.classList.remove('show');
+      }
+    }
+  });
 }
+
 function toggleSidebar() {
- sidebar.classList.toggle('collapsed');
+  sidebar.classList.toggle('collapsed');
+
+  if (window.innerWidth <= 1024) {
+    sidebar.classList.toggle('show');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initializeSidebar);
+
  
  // On mobile, show/hide sidebar
  if (window.innerWidth <= 1024) {

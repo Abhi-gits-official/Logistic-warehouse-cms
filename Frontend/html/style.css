@@ -201,6 +201,23 @@ body {
     background-color: var(--bg-sidebar-hover);
 }
 
+.sidebar-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  color: var(--text-white);
+  transition: font-size 0.3s ease, opacity 0.0s ease;
+}
+
+.sidebar.collapsed .logo-text {
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease, width 0.0s ease;
+}
+
 .nav-menu {
     list-style: none;
     padding: 20px 0;

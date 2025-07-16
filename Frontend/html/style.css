@@ -200,7 +200,6 @@ body {
 .sidebar-toggle:hover {
     background-color: var(--bg-sidebar-hover);
 }
-
 .sidebar-header h2 {
   display: flex;
   align-items: center;

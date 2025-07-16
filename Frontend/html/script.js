@@ -100,12 +100,13 @@ function toggleSidebar() {
 
 document.addEventListener('DOMContentLoaded', initializeSidebar);
 
+
  
  // On mobile, show/hide sidebar
  if (window.innerWidth <= 1024) {
  sidebar.classList.toggle('show');
  }
-}
+
 // Navigation Functionality
 function initializeNavigation() {
  navItems.forEach(item => {

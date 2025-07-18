@@ -164,7 +164,7 @@ body {
   z-index: 1;
 }
 
-.login-card {
+/* .login-card {
   background: #fff;
   color: #333;
   padding: 30px 40px;
@@ -172,9 +172,13 @@ body {
   box-shadow: 0 4px 24px rgba(0,0,0,0.15);
   min-width: 320px;
   margin-top: 20px;
-}
+} */
 
-.login-card h2 {
+/* .mycard {
+  background-color: #1E1E1E;
+} */
+
+/* .login-card h2 {
   margin-bottom: 20px;
   font-weight: 600;
 }
@@ -186,9 +190,9 @@ body {
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 16px;
-}
+} */
 
-.login-card button {
+/* .login-card button {
   width: 100%;
   padding: 10px;
   background: #e8491d;
@@ -198,10 +202,15 @@ body {
   font-size: 16px;
   cursor: pointer;
   font-weight: 600;
+}*/
+
+.sign-btn:hover {
+  /* background: #1d1f61; */
+  background: rgb(27, 1, 132);
 }
 
-.login-card button:hover {
-  background: #35424a;
+.sign-btn{
+  background-color: #283adce6;
 }
 
 .landing.container.text-center {
@@ -223,3 +232,27 @@ body {
   border-radius: 0.625rem;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
+
+
+
+/* body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f8ff;
+} */
+/* 
+.truck {
+  animation: moveTruck 5s linear infinite;
+}
+
+@keyframes moveTruck {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(300px);
+  }
+}  */

@@ -2,11 +2,38 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     const themeToggle = document.getElementById('theme-toggle');
+    const bootstrapTheme = document.getElementById('bootstrap-theme');
+    const body = document.body;
+    const card = document.querySelector('.card');
+    const loginTitle = document.querySelector('.login-title');
+    const loginSubtitle = document.querySelector('.login-subtitle');
     const modules = document.querySelectorAll('.module');
     const toast = document.getElementById('toast');
+    let darkMode = false;
 
-    themeToggle.addEventListener('click', function() {
-        document.body.classList.toggle('dark-theme');
+    themeToggle.addEventListener('click', () => {
+        darkMode = !darkMode;
+        if (darkMode) {
+            bootstrapTheme.href = "https://cdn.jsdelivr.net/npm/bootstrap-dark-5@1.1.3/dist/css/bootstrap-dark.min.css";
+            body.classList.remove('bg-light', 'text-dark');
+            body.classList.add('bg-dark', 'text-light');
+            card.classList.remove('bg-white', 'text-dark');
+            card.classList.add('bg-dark', 'text-light');
+            loginTitle.style.color = "#fff";
+            loginSubtitle.classList.remove('text-muted');
+            loginSubtitle.classList.add('text-light');
+            themeToggle.textContent = "☀️";
+        } else {
+            bootstrapTheme.href = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css";
+            body.classList.remove('bg-dark', 'text-light');
+            body.classList.add('bg-light', 'text-dark');
+            card.classList.remove('bg-dark', 'text-light');
+            card.classList.add('bg-white', 'text-dark');
+            loginTitle.style.color = "#222";
+            loginSubtitle.classList.remove('text-light');
+            loginSubtitle.classList.add('text-muted');
+            themeToggle.textContent = "🌙";
+        }
     });
 
     function showModule(event, moduleId) {

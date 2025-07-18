@@ -1,8 +1,36 @@
-body {
+html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background-color: #f4f6f8;
+  overflow: hidden; /* Remove scrollbars */
+  background: #f8f9fa;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  position: relative;
+}
+
+.center-container {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.svg-bottom {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 200px;
+  z-index: 0;
+  pointer-events: none;
+  background-color: red;
 }
 
 .header {
@@ -243,16 +271,30 @@ body {
   margin: 0;
   background-color: #f0f8ff;
 } */
-/* 
-.truck {
-  animation: moveTruck 5s linear infinite;
+ 
+
+
+.wrapper{
+  transform: translate(-50%, -50%);
+  
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  
 }
+
+
+
+.truck {
+  animation: moveTruck 12s linear infinite;
+}
+
 
 @keyframes moveTruck {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(300px);
+    transform: translateX(1200px);
   }
-}  */
+}

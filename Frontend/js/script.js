@@ -1,6 +1,6 @@
 // This file contains JavaScript code for the frontend application, handling user interactions, and dynamic content updates.
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const themeToggle = document.getElementById('theme-toggle');
     const bootstrapTheme = document.getElementById('bootstrap-theme');
     const body = document.body;
@@ -22,14 +22,12 @@ document.addEventListener('DOMContentLoaded', function() {
     errorMsg.style.display = "none";
     loginForm.insertBefore(errorMsg, loginForm.querySelector('button'));
 
-    loginForm.addEventListener('submit', function(e) {
+    loginForm.addEventListener('submit', function (e) {
         e.preventDefault();
         const username = usernameInput.value.trim();
         const password = passwordInput.value.trim();
 
-        // Username: only lowercase alphanumeric, @, _
         const usernameRegex = /^[a-z0-9@_]+$/;
-        // Password: at least 6 chars, must contain at least one letter and one number, only alphanumeric
         const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9]{6,}$/;
 
         if (!usernameRegex.test(username)) {
@@ -44,11 +42,13 @@ document.addEventListener('DOMContentLoaded', function() {
             passwordInput.focus();
             return;
         }
+
         errorMsg.style.display = "none";
-        // Proceed with login (you can add your logic here)
-        alert("Login successful!");
-        loginForm.reset();
+
+        // ✅ Redirect to Google after successful validation
+        window.location.href = "./admin/home.html";
     });
+
 
     themeToggle.addEventListener('click', () => {
         darkMode = !darkMode;
@@ -85,14 +85,15 @@ document.addEventListener('DOMContentLoaded', function() {
         toast.classList.add('hidden');
     }
 
-    // Example function to show toast notification
-    function showToast(message) {
-        toast.textContent = message;
-        toast.classList.remove('hidden');
-        setTimeout(() => {
-            toast.classList.add('hidden');
-        }, 3000);
-    }
+
+    // // Example function to show toast notification
+    // function showToast(message) {
+    //     toast.textContent = message;
+    //     toast.classList.remove('hidden');
+    //     setTimeout(() => {
+    //         toast.classList.add('hidden');
+    //     }, 3000);
+    // }
 
     // Add event listeners for navigation
     const navItems = document.querySelectorAll('.sidebar li');

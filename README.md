@@ -3,6 +3,9 @@
 ## Overview
 The Logistic Warehouse Management System (LWMS) is a web-based application designed to streamline the management of warehouse operations. It provides functionalities for inventory management, shipment handling, space optimization, maintenance scheduling, and performance reporting.
 
+## UML Diagram
+<img src="./images/UML-diagram.drawio.png" width="400">
+
 ## Project Structure
 The project is organized into the following directories and files:
 
